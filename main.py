@@ -32,9 +32,9 @@ full_arr = np.exp((mu - (sigma ** 2) / 2) * dt + (sigma * np.sqrt(dt) * Z_arr))
 # Creates the price paths by multiplying last day's price times next
 full_arr = S0 * np.cumprod(full_arr, axis = 1)
 
-final_pred = full_arr[:, -1].mean()
-print(f"The final prediction for the stock in a year (5/29/2026) is {round(final_pred, 2)}")
+final_pred = full_arr[:, -1]
+print(f"The final prediction (mean) for the stock in a year (5/29/2026) is {round(np.mean(final_pred), 2)}")
+print(f"The median price for the stock in a year (5/29/2026) is: {round(np.median(final_pred), 2)}")
 
-final_prices = full_arr[:, -1]
 for p in [5, 25, 50, 75, 95]:
-    print(f"{p}th percentile: {np.percentile(final_prices, p):.2f}")
+    print(f"{p}th percentile: {np.percentile(final_pred, p):.2f}")
